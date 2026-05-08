@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Alegra · Presupuestos</title>
+<meta name="viewport" content="width=1440, initial-scale=1" />
+<link rel="stylesheet" href="colors_and_type.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: var(--slate-50); font-family: var(--font-sans); color: var(--slate-900); }
+  * { box-sizing: border-box; }
+  i.ti { line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+  table { font-feature-settings: "tnum"; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--slate-300); border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--slate-400); border: 2px solid transparent; background-clip: content-box; }
+  @keyframes alegra-spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<link rel="stylesheet" href="https://unpkg.com/@tabler/icons-webfont@3.34.0/dist/tabler-icons.min.css">
+<script src="alegra-data.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="Primitives.jsx"></script>
+<script type="text/babel" src="Shell.jsx"></script>
+<script type="text/babel" src="BudgetData.jsx"></script>
+<script type="text/babel" src="BudgetWizard.jsx"></script>
+<script type="text/babel" src="BudgetGrid.jsx"></script>
+<script type="text/babel" src="AIPanel.jsx"></script>
+<script type="text/babel" src="BudgetModals.jsx"></script>
+<script type="text/babel" src="BudgetEditor.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const InformesSidebar = () => <Sidebar route="informes" onRoute={() => {}} />;
+
+function App() {
+  const initial = (() => {
+    try { return JSON.parse(localStorage.getItem("alegra-budget-wizard")) || null; }
+    catch { return null; }
+  })();
+  const [wizardData, setWizardData] = React.useState(initial);
+  const [showWizard, setShowWizard] = React.useState(!initial);
+
+  const onCreate = (data) => {
+    setWizardData(data);
+    setShowWizard(false);
+    try { localStorage.setItem("alegra-budget-wizard", JSON.stringify(data)); } catch {}
+  };
+  const onCancel = () => { if (wizardData) setShowWizard(false); };
+  const reopen   = () => setShowWizard(true);
+
+  return (
+    <div data-screen-label="Presupuesto Alegra" style={{ display:"flex", minHeight:"100vh" }}>
+      <InformesSidebar />
+      <div style={{ flex:1, display:"flex", flexDirection:"column", minWidth:0 }}>
+        <Topbar title="Informes › Presupuestos" />
+        <main style={{ flex:1, minWidth:0, background:"var(--slate-50)" }}>
+          {wizardData
+            ? <BudgetEditor wizardData={wizardData} onReopenWizard={reopen} />
+            : <PreScreen onStart={() => setShowWizard(true)} />}
+        </main>
+      </div>
+      {showWizard ? <BudgetWizard onCreate={onCreate} onCancel={onCancel} /> : null}
+      {wizardData ? (
+        <button onClick={() => {
+          try { localStorage.removeItem("alegra-budget-wizard"); } catch {}
+          setWizardData(null); setShowWizard(true);
+        }} style={{
+          position:"fixed", left:16, bottom:16, zIndex:40,
+          padding:"8px 12px", borderRadius:999,
+          border:"1px solid var(--slate-300)", background:"#fff",
+          fontSize:12, color:"var(--slate-600)", cursor:"pointer",
+          display:"inline-flex", alignItems:"center", gap:6,
+          boxShadow:"var(--shadow-md)",
+        }}>
+          <i className="ti ti-refresh" style={{ fontSize:14 }} /> Reiniciar demo
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
+const PreScreen = ({ onStart }) => (
+  <div style={{ padding:64, maxWidth:720, margin:"0 auto" }}>
+    <div style={{
+      width:64, height:64, borderRadius:16,
+      background:"linear-gradient(135deg,#30ABA9 0%,#837FF3 100%)",
+      display:"grid", placeItems:"center", color:"#fff", marginBottom:20,
+    }}>
+      <i className="ti ti-file-stack" style={{ fontSize:32 }} />
+    </div>
+    <h1 style={{ margin:"0 0 8px", fontSize:28, fontWeight:700 }}>Presupuestos</h1>
+    <p style={{ margin:"0 0 24px", fontSize:15, color:"var(--slate-600)", lineHeight:1.6 }}>
+      Crea presupuestos anuales conectando tu cuenta de Alegra para obtener datos reales,
+      sugerencias de IA y comparativas vs. tus actuals.
+    </p>
+    <Button variant="filled" icon="plus" onClick={onStart}>Crear presupuesto</Button>
+  </div>
+);
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

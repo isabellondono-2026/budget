@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Alegra "Smile UI" — Colors & Type tokens
+   Source: Figma file "Smile UI.fig" (Tokens page + Color-System + Typography-tokens)
+   ========================================================================== */
+
+/* -------- Fonts -------------------------------------------------------- */
+/* The Figma file uses Inter (Regular/Medium/Semibold/Bold). Served from
+   Google Fonts; see README "FONT SUBSTITUTION" note. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* -------- Color ramps --------------------------------------------- */
+  /* High contrast */
+  --c-white: #FFFFFF;
+  --c-black: #1A1A1A;
+
+  /* sm-primary (Alegra teal) */
+  --sm-primary-100: #CFF2F1;
+  --sm-primary-200: #B6ECE9;
+  --sm-primary-300: #9BE4E0;
+  --sm-primary-400: #72D5D1;
+  --sm-primary-500: #30BBB7;
+  --sm-primary-600: #30ABA9; /* brand action */
+  --sm-primary-700: #299E9C;
+  --sm-primary-800: #208D8D;
+  --sm-primary-900: #1A7E7F;
+
+  /* Alanube (indigo, used in Plan-Demo) */
+  --sm-indigo-100: #E0DFFC;
+  --sm-indigo-200: #D2D1FA;
+  --sm-indigo-300: #C5C3F9;
+  --sm-indigo-400: #AAA7F6;
+  --sm-indigo-500: #837FF3;
+  --sm-indigo-600: #7773E8;
+  --sm-indigo-700: #6C68D9;
+  --sm-indigo-800: #5D5ABF;
+  --sm-indigo-900: #514EA6;
+
+  /* Neutrals — Tailwind Slate */
+  --slate-50:  #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-400: #94A3B8;
+  --slate-500: #64748B;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1E293B;
+  --slate-900: #0F172A;
+
+  /* Semantic ramps (Tailwind stops observed in metadata) */
+  --rose-600:   #E11D48;   /* danger */
+  --green-500:  #249F58;
+  --green-800:  #1A7E7F;
+  --yellow-400: #FFDA2C;
+  --blue-700:   #1A47B8;
+  --indigo-600: #4F46E5;
+
+  /* -------- Semantic tokens ----------------------------------------- */
+  /* Backgrounds */
+  --s-bg-page:       var(--slate-100); /* default page bg */
+  --s-bg-container:  var(--c-white);   /* cards, modals */
+  --s-bg-overlay:    rgba(15,23,42,.6);/* modal scrim */
+  --s-bg-subtle:     var(--slate-50);
+  --s-bg-muted:      var(--slate-100);
+  --s-bg-hover:      var(--slate-100);
+  --s-bg-selected:   var(--sm-primary-100);
+
+  /* Text */
+  --s-text-primary:   var(--slate-900);
+  --s-text-secondary: var(--slate-700);
+  --s-text-muted:     var(--slate-500);
+  --s-text-disabled:  var(--slate-400);
+  --s-text-inverse:   var(--c-white);
+  --s-text-brand:     var(--sm-primary-700);
+  --s-text-danger:    var(--rose-600);
+  --s-text-success:   var(--green-500);
+
+  /* Icon */
+  --s-icon-primary:   var(--slate-700);
+  --s-icon-secondary: var(--slate-500);
+  --s-icon-muted:     var(--slate-400);
+  --s-icon-brand:     var(--sm-primary-600);
+  --s-icon-inverse:   var(--c-white);
+
+  /* Borders / strokes */
+  --s-border-subtle:  var(--slate-200);
+  --s-border-default: rgba(148,163,184,.4); /* slate-400 @ 40% — button outline */
+  --s-border-strong:  var(--slate-300);
+  --s-border-focus:   var(--sm-primary-600);
+  --s-border-danger:  var(--rose-600);
+
+  /* Actions */
+  --s-action-primary:         var(--sm-primary-600);
+  --s-action-primary-hover:   var(--sm-primary-700);
+  --s-action-primary-pressed: var(--sm-primary-800);
+  --s-action-primary-fg:      var(--c-white);
+
+  --s-action-subtle-bg:       var(--sm-primary-100);
+  --s-action-subtle-fg:       var(--sm-primary-900);
+
+  --s-action-danger:          var(--rose-600);
+  --s-action-danger-hover:    #BE123C;
+
+  /* Status tokens (Status-indicator, Notifications, Tags) */
+  --s-status-info-bg:     #E0E7FF;
+  --s-status-info-fg:     var(--indigo-600);
+  --s-status-success-bg:  #DCFCE7;
+  --s-status-success-fg:  var(--green-500);
+  --s-status-warning-bg:  #FEF3C7;
+  --s-status-warning-fg:  #B45309;
+  --s-status-danger-bg:   #FEE2E2;
+  --s-status-danger-fg:   var(--rose-600);
+  --s-status-neutral-bg:  var(--slate-100);
+  --s-status-neutral-fg:  var(--slate-700);
+
+  /* -------- Radius -------------------------------------------------- */
+  --radius-sm:   4px;   /* .rounded-sm */
+  --radius-lg:   8px;   /* buttons, tooltips */
+  --radius-xl:   12px;  /* notifications */
+  --radius-2xl:  16px;  /* modals, containers */
+  --radius-3xl:  24px;
+  --radius-full: 9999px;
+
+  /* -------- Elevation ---------------------------------------------- */
+  --shadow-sm:  0 1px 2px rgba(15,23,42,.06);
+  --shadow-md:  0 4px 6px -1px rgba(15,23,42,.10), 0 2px 4px -2px rgba(15,23,42,.06);
+  --shadow-lg:  0 10px 15px -3px rgba(15,23,42,.10), 0 4px 6px -4px rgba(15,23,42,.06);
+  --shadow-xl:  0 20px 25px -5px rgba(15,23,42,.10), 0 8px 10px -6px rgba(15,23,42,.06);
+  --shadow-2xl: 0 25px 50px -12px rgba(15,23,42,.25);
+  --shadow-focus: 0 0 0 3px rgba(48,171,169,.25);
+
+  /* -------- Spacing (4px base) ------------------------------------- */
+  --s-0:  0;
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-14: 56px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+
+  /* -------- Typography --------------------------------------------- */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* Size scale (Figma: Typography-tokens) */
+  --text-xs:   12px;  --lh-xs:   16px;
+  --text-sm:   14px;  --lh-sm:   20px;
+  --text-base: 16px;  --lh-base: 24px;
+  --text-lg:   18px;  --lh-lg:   28px;
+  --text-xl:   20px;  --lh-xl:   28px;
+  --text-2xl:  24px;  --lh-2xl:  32px;
+  --text-3xl:  32px;  --lh-3xl:  40px;
+  --text-4xl:  40px;  --lh-4xl:  48px;
+  --text-5xl:  48px;  --lh-5xl:  56px;
+  --text-6xl:  56px;  --lh-6xl:  64px;
+
+  /* Semantic type roles (from Typography-System frame) */
+  /* Heading-1  20/28 Semibold — page headers, empty states */
+  /* Body-1     16/24 Regular / Medium for emphasis */
+  /* Body-2     14/20 Regular */
+  /* Caption    12/16 Regular/Semibold */
+  /* Label-1    16/24 Medium, Label-2 14/20 Medium, Label-3 12/16 Medium */
+}
+
+/* -------- Semantic element styles ---------------------------------- */
+html, body {
+  font-family: var(--font-sans);
+  color: var(--s-text-primary);
+  background: var(--s-bg-page);
+  font-size: var(--text-base);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, .h1 {
+  font-size: var(--text-3xl);
+  line-height: var(--lh-3xl);
+  font-weight: var(--fw-bold);
+  color: var(--s-text-primary);
+  letter-spacing: -0.01em;
+}
+h2, .h2 {
+  font-size: var(--text-2xl);
+  line-height: var(--lh-2xl);
+  font-weight: var(--fw-semibold);
+  color: var(--s-text-primary);
+}
+h3, .h3 {
+  font-size: var(--text-xl);
+  line-height: var(--lh-xl);
+  font-weight: var(--fw-semibold);
+  color: var(--s-text-primary);
+}
+h4, .h4 {
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--s-text-primary);
+}
+p, .body {
+  font-size: var(--text-base);
+  line-height: var(--lh-base);
+  color: var(--s-text-secondary);
+}
+.body-sm {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  color: var(--s-text-secondary);
+}
+.caption {
+  font-size: var(--text-xs);
+  line-height: var(--lh-xs);
+  color: var(--s-text-muted);
+}
+.label {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--fw-medium);
+  color: var(--s-text-primary);
+}
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--slate-100);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
