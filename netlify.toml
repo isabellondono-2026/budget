@@ -1,0 +1,20 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+# Redirigir /api/alegra/* → la Netlify Function
+[[redirects]]
+  from   = "/api/alegra"
+  to     = "/.netlify/functions/alegra"
+  status = 200
+
+[[redirects]]
+  from   = "/api/alegra/*"
+  to     = "/.netlify/functions/alegra"
+  status = 200
+
+# SPA fallback
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
